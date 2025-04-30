@@ -1,25 +1,18 @@
 ---
-//src/layouts/BaseLayout.astro
-const {title = "Welcome", children} = Astro.props;
+// src/layouts/BaseLayout.astro
+const { title = "Welcome", children } = Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-  </head>
-  <body style="font-family: sans-serif; margin: 2rem;">
-    <header>
-      <h1><a href="/">Alejandro Garcia</a></h1>
-    </header>
+<section style="font-family: sans-serif; margin: 2rem;">
+  <header>
+    <h1><a href="/">Alejandro Garcia</a></h1>
+  </header>
 
-    <main>
-      {children}
-    </main>
+  <main>
+    <slot/>
+  </main>
 
-    <footer style="margin-top: 4rem; font-size: 0.9rem;">
-      <p>© {new Date().getFullYear()} Alejandro Garcia — Built with Astro</p>
-    </footer>
-  </body>
-</html>
+  <footer style="margin-top: 4rem; font-size: 0.9rem;">
+    <p>&copy; {new Date().getFullYear()} Alejandro Garcia &mdash; Built with Astro</p>
+  </footer>
+</section>
