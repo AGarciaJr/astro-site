@@ -1,13 +1,10 @@
 ---
 // src/layouts/BaseLayout.astro
+import "../styles/global.css";
 const { title = "Welcome", children } = Astro.props;
 ---
 
 <section style="font-family: sans-serif; margin: 2rem;">
-  <header>
-    <h1><a href="/">Alejandro Garcia</a></h1>
-  </header>
-
   <main>
     <slot/>
   </main>

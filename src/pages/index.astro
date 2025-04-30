@@ -1,30 +1,33 @@
 ---
-// src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Alejandro Garcia">
-  <section>
-    <h2>Hi, I'm Alejandro</h2>
-    <p>
-      I'm a Computer Science student at Baylor and a full-stack developer passionate about education,
-      SaaS tools, and teaching underserved communities.
-    </p>
+  <main class="min-h-screen bg-[#f8f6f4] text-black font-mono px-4 flex flex-col items-center justify-start pt-10">
 
-    <p>
-      I build tools that help people learn faster, code better, and take control of their careers.
-    </p>
+    <h1 class="text-4xl md:text-5xl font-bold text-center mb-2">Alejandro Garcia</h1>
+    <p class="text-xl text-gray-500 text-center mb-6">CS Student & Developer in Texas</p>
 
-    <div style="margin-top: 1.5rem;">
-      <a href="https://github.com/AGarciaJr" target="_blank">GitHub</a> |
-      <a href="https://www.linkedin.com/in/AGarciaJr" target="_blank">LinkedIn</a> |
-      <a href="mailto:alejandrogarciacsi@gmail.com">Email Me</a>
-    </div>
+    <nav class="flex gap-4 mb-6 text-lg">
+      <a href="/" class="font-bold border-b-2 border-purple-500">home</a>
+      <a href="/about" class="hover:underline">about</a>
+      <a href="/projects" class="hover:underline">projects</a>
+      <a href="https://github.com/AGarciaJr" class="hover:underline" target="_blank">github</a>
+      <a href="https://www.linkedin.com/in/AGarciaJr" class="hover:underline" target="_blank">linkedin</a>
+    </nav>
 
-    <div style="margin-top: 2rem;">
-        <a href="/resume.pdf" target="_blank">
-            <span aria-hidden="true"></span> View Resume
-        </a>
-    </div>
-  </section>
+    <section class="max-w-xl text-center text-base leading-relaxed space-y-4">
+      <p>
+        Hi! I'm Alejandro, and I love building software, solving problems, and teaching others.
+      </p>
+      <p>
+        I'm currently studying CS at Baylor and working on SaaS tools to make learning more accessible.
+        When I'm not coding, I'm probably mentoring, organizing a CS event, or playing some pickup basketball.
+      </p>
+      <p>
+        You should <a href="/resume.pdf" class="text-green-700 underline">check out my resume</a> or
+        <a href="mailto:alejandrogarciacsi@gmail.com" class="text-blue-600 underline">email me</a>!
+      </p>
+    </section>
+  </main>
 </BaseLayout>
