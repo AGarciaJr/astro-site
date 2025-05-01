@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import TagList from '../../components/TagList.astro';
 
 const posts = await getCollection('blog');
 
@@ -12,45 +13,92 @@ const years = Array.from(new Set(posts.map(post =>
   new Date(post.data.date).getFullYear()
 ))).sort((a, b) => b - a);
 
+// Group posts by year
+const postsByYear: Record<string, typeof posts> = posts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {} as Record<string, typeof posts>);
+
+// Sort years descending
+const sortedYears = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+
 // Unique tags
 const tags = Array.from(new Set(posts.flatMap(post => post.data.tags || []))).sort();
+
+// Format date
+const formatDate = (date: Date) => {
+  const options: Intl.DateTimeFormatOptions = {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC'  // Use UTC to prevent timezone offset issues
+  };
+  return new Date(date).toLocaleDateString('en-US', options);
+};
 ---
 
-<BaseLayout title="Blog – Alejandro Garcia" description="Posts and writing by Alejandro Garcia.">
-  <h1 class="text-3xl font-bold mb-6 text-center">Blog</h1>
+<BaseLayout title="Blog" description="Personal blog entries by Alejandro Garcia">
+  <div class="header-section text-center py-12">
+    <div class="header-content">
+      <h1 class="text-4xl font-bold mb-2">Alejandro's blog</h1>
+      <h2 class="text-xl text-gray-600">A collection of my thoughts and experiences</h2>
+    </div>
+  </div>
 
   <!-- Year Filter UI -->
-  <div class="border-t border-gray-300 py-4 text-center space-x-4 flex flex-wrap justify-center font-mono text-lg">
+  <div class="border-t border-black py-8 mt-8 mb-8 text-center space-x-4 flex flex-wrap justify-center font-mono text-lg">
     {years.map(year => (
-      <a href={`/blog/year/${year}`} class="underline decoration-2 decoration-blue-600 hover:decoration-pink-500">
+      <a href={`/blog/year/${year}`} class="underline decoration-2 decoration-green-600 hover:decoration-blue-500">
         {year}
       </a>
     ))}
   </div>
+  
+<!-- Tag Filter UI -->
+<TagList tags={tags} className="justify-center my-4" />
+  
+  <section class="mt-16 space-y-16">
+    {sortedYears.map((year) => (
+      <div>
+        <h2 class="text-3xl mb-8">
+          {year}
+        </h2>
 
-  <!-- Tag Filter UI -->
-  <div class="border-t border-gray-300 py-4 text-center space-x-4 flex flex-wrap justify-center font-mono text-lg">
-    {tags.map(tag => (
-      <a href={`/blog/tag/${tag}`} class="underline decoration-2 decoration-green-600 hover:decoration-pink-500">
-        #{tag}
-      </a>
-    ))}
-  </div>
+        <div class="space-y-8">
+          {postsByYear[year].map((post) => (
+            <article>
+              <div class="flex items-baseline justify-between gap-4">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="text-xl hover:text-blue-600"
+                >
+                {post.data.title}
+                </a>
+                <time
+                  datetime={post.data.date.toISOString()}
+                  class="text-sm text-gray-500 whitespace-nowrap"
+                >
+                  {formatDate(post.data.date)}
+                </time>
+              </div>
 
-  <!-- Blog Post List -->
-  <ul class="space-y-6 mt-8">
-    {posts.map(post => (
-      <li>
-        <a href={`/blog/${post.slug}`} class="text-2xl font-semibold text-blue-600 hover:underline">
-          {post.data.title}
-        </a>
-        <p class="text-sm text-gray-500">{new Date(post.data.date).toLocaleDateString()}</p>
-        {post.data.description && (
-          <p class="mt-1 text-base text-gray-700 dark:text-gray-300">
-            {post.data.description}
-          </p>
-        )}
-      </li>
+              {post.data.description && (
+                <p class="text-gray-600 mt-2">
+                  {post.data.description}
+                </p>
+              )}
+
+              
+              {post.data.tags && (
+                <TagList tags={post.data.tags} className="mt-4" />
+              )}
+
+            </article>
+          ))}
+        </div>
+      </div>
     ))}
-  </ul>
+  </section>
 </BaseLayout>

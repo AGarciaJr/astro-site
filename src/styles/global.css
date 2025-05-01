@@ -24,9 +24,7 @@ html[data-theme='light'] {
     --color-text: #1a1a1a;
     --color-accent: #ff69b4;
 }
-  
-  
-
+    
 body {
     font-family: var(--font-mono);
     color: var(--color-text);
@@ -136,3 +134,19 @@ h3 {
   font-size: 1.2rem;
   font-weight: normal;
 }
+
+/* Tag styles */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-list a {
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  margin-right: 0.1rem;
+}
+  
