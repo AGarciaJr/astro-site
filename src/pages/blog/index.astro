@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+
+// Sort posts by date (newest first)
+posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Unique years
+const years = Array.from(new Set(posts.map(post =>
+  new Date(post.data.date).getFullYear()
+))).sort((a, b) => b - a);
+
+// Unique tags
+const tags = Array.from(new Set(posts.flatMap(post => post.data.tags || []))).sort();
+---
+
+<BaseLayout title="Blog – Alejandro Garcia" description="Posts and writing by Alejandro Garcia.">
+  <h1 class="text-3xl font-bold mb-6 text-center">Blog</h1>
+
+  <!-- Year Filter UI -->
+  <div class="border-t border-gray-300 py-4 text-center space-x-4 flex flex-wrap justify-center font-mono text-lg">
+    {years.map(year => (
+      <a href={`/blog/year/${year}`} class="underline decoration-2 decoration-blue-600 hover:decoration-pink-500">
+        {year}
+      </a>
+    ))}
+  </div>
+
+  <!-- Tag Filter UI -->
+  <div class="border-t border-gray-300 py-4 text-center space-x-4 flex flex-wrap justify-center font-mono text-lg">
+    {tags.map(tag => (
+      <a href={`/blog/tag/${tag}`} class="underline decoration-2 decoration-green-600 hover:decoration-pink-500">
+        #{tag}
+      </a>
+    ))}
+  </div>
+
+  <!-- Blog Post List -->
+  <ul class="space-y-6 mt-8">
+    {posts.map(post => (
+      <li>
+        <a href={`/blog/${post.slug}`} class="text-2xl font-semibold text-blue-600 hover:underline">
+          {post.data.title}
+        </a>
+        <p class="text-sm text-gray-500">{new Date(post.data.date).toLocaleDateString()}</p>
+        {post.data.description && (
+          <p class="mt-1 text-base text-gray-700 dark:text-gray-300">
+            {post.data.description}
+          </p>
+        )}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

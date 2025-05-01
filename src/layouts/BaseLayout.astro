@@ -4,7 +4,7 @@ import "../styles/global.css";
 const { title, description } = Astro.props;
 
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // remove the first "/"
+const currentPath = pathname.slice(1);
 ---
 
 <!DOCTYPE html>
@@ -15,11 +15,10 @@ const currentPath = pathname.slice(1); // remove the first "/"
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body>
-    <div class="container">
+  <body class="min-h-screen flex flex-col">
+    <div class="container mx-auto flex-1">
       <nav>
         <a href="/" class={currentPath === "" ? "active" : ""}>home</a>
-        <a href="/newsletter" class={currentPath === "newsletter" ? "active" : ""}>newsletter</a>
         <a href="/blog" class={currentPath === "blog" ? "active" : ""}>blog</a>
         <a href="https://github.com/AGarciaJr" target="_blank">github</a>
         <a href="https://www.linkedin.com/in/alejandro-garcia-jr/" target="_blank">linkedin</a>
@@ -29,9 +28,10 @@ const currentPath = pathname.slice(1); // remove the first "/"
         <slot />
       </main>
 
-      <footer>
-        <p>&copy; {new Date().getFullYear()} Alejandro Garcia.</p>
+      <footer class="text-center py-4 text-sm text-gray-500">
+        <p class="text-center mx-auto w-full">&copy; {new Date().getFullYear()} Alejandro Garcia.</p>
       </footer>
+      
     </div>
   </body>
 </html>
