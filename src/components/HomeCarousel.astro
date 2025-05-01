@@ -1,0 +1,189 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import TagList from '../components/TagList.astro';
+
+interface Project {
+  title: string;
+  description: string;
+  link: string;
+  tags: string[];
+}
+
+// Get blog posts
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort(
+  (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const recentPosts = sortedPosts.slice(0, 5);
+
+// Format date
+const formatDate = (date: Date): string =>
+  new Date(date).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+
+// Mock projects data
+const projects: Project[] = [
+  {
+    title: 'Personal Blog',
+    description: 'A minimalist blog built with Astro and TailwindCSS',
+    link: 'https://github.com/yourusername/blog',
+    tags: ['astro', 'tailwind', 'typescript'],
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'My personal portfolio showcasing my work and experience',
+    link: 'https://github.com/yourusername/portfolio',
+    tags: ['react', 'nextjs', 'typescript'],
+  },
+];
+---
+
+<div class="carousel-container mt-16">
+  <div class="flex justify-between items-center mb-8">
+    <button class="carousel-button prev text-2xl px-4 py-2 rounded-full hover:bg-gray-100" id="prevBtn">←</button>
+    <h3 class="text-center flex-grow">Featured Content</h3>
+    <button class="carousel-button next text-2xl px-4 py-2 rounded-full hover:bg-gray-100" id="nextBtn">→</button>
+  </div>
+
+  <div class="carousel-wrapper overflow-hidden">
+    <div class="carousel-slides flex transition-transform duration-300" id="slides">
+      <!-- Recent Posts -->
+      <div class="carousel-slide w-full flex-shrink-0">
+        <h4 class="text-xl mb-6">Recent Posts</h4>
+        <div class="space-y-8">
+          {recentPosts.map((post) => (
+            <article>
+              <div class="flex items-baseline justify-between gap-4">
+                <a href={`/blog/${post.slug}`} class="text-xl underline decoration-blue-500 decoration-2">
+                  {post.data.title}
+                </a>
+                <time datetime={post.data.date.toISOString()} class="text-sm text-gray-600 whitespace-nowrap italic">
+                  {formatDate(post.data.date)}
+                </time>
+              </div>
+              {post.data.description && (
+                <p class="text-gray-600 mt-2 mb-4 text-base">{post.data.description}</p>
+              )}
+              {post.data.tags && <TagList tags={post.data.tags} className="mt-2" />}
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="carousel-slide w-full flex-shrink-0">
+        <h4 class="text-xl mb-6">Recent Projects</h4>
+        <div class="space-y-8">
+          {projects.map((project) => (
+            <article>
+              <div class="flex items-baseline justify-between gap-4">
+                <a
+                  href={project.link}
+                  class="text-xl underline decoration-blue-500 decoration-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {project.title}
+                </a>
+              </div>
+              <p class="text-gray-600 mt-2 mb-4 text-base">{project.description}</p>
+              <TagList tags={project.tags} className="mt-2" />
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  let currentSlide = 0;
+  const slides = document.getElementById('slides');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const slideCount = 2;
+
+  function updateSlidePosition() {
+    if (slides) {
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slideCount;
+    updateSlidePosition();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+    updateSlidePosition();
+  }
+
+  prevBtn?.addEventListener('click', prevSlide);
+  nextBtn?.addEventListener('click', nextSlide);
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+  }
+</script>
+
+<style>
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-slides {
+    display: flex;
+    width: 100%;
+  }
+
+  .carousel-slide {
+    width: 100%;
+    flex: 0 0 100%;
+    padding: 0 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .carousel-button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+  }
+
+  @media (hover: hover) {
+    .carousel-button:hover {
+      background-color: #f3f4f6;
+    }
+  }
+</style>

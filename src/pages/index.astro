@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeCarousel from '../components/HomeCarousel.astro';
 ---
 
 <BaseLayout title="Alejandro Garcia - Software Engineer" description="Personal website of Alejandro Garcia">
@@ -32,5 +33,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p>You should <a href="/newsletter">subscribe to my newsletter</a>!</p>
   </div>
 
-  <h3>Here's my most recent posts or <a href="/blog/random">read a random one</a>!</h3>
+  <HomeCarousel />
 </BaseLayout>
