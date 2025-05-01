@@ -1,30 +1,37 @@
 ---
-// src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeCarousel from '../components/HomeCarousel.astro';
 ---
 
-<BaseLayout title="Alejandro Garcia">
-  <section>
-    <h2>Hi, I'm Alejandro</h2>
+<BaseLayout title="Alejandro Garcia - Software Engineer" description="Personal website of Alejandro Garcia">
+  <div class="header-section">
+    <div class="header-content">
+      <h1>Alejandro Garcia</h1>
+      <h2>Software Engineering @<br />Baylor University</h2>
+    </div>
+
+    <div class="profile-image-container">
+      <img
+        src="/profile-image.jpg"
+        alt="Alejandro Garcia"
+        class="profile-image"
+      />
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <p>Hi! I'm Alex, a Computer Science student at Baylor and a future software engineer with a growing passion for databases and AI. I'm currently exploring research opportunities while building up my portfolio through personal projects and freelance work.</p>
+
     <p>
-      I'm a Computer Science student at Baylor and a full-stack developer passionate about education,
-      SaaS tools, and teaching underserved communities.
+      I got into software development because, where I'm from, it's rare — there's no CS curriculum back home. That gap drives me. Short term, I'm looking to work in industry and learn from experienced engineers. Long term, I want to build pathways for underrepresented communities to discover and thrive in tech.
     </p>
 
     <p>
-      I build tools that help people learn faster, code better, and take control of their careers.
+      Outside of coding, I love reading, watching movies, listening to music, and I've recently taken up golf. I'm actively job hunting, preparing for Baylor's 4+1 program, and working on tools that help people.
     </p>
 
-    <div style="margin-top: 1.5rem;">
-      <a href="https://github.com/AGarciaJr" target="_blank">GitHub</a> |
-      <a href="https://www.linkedin.com/in/AGarciaJr" target="_blank">LinkedIn</a> |
-      <a href="mailto:alejandrogarciacsi@gmail.com">Email Me</a>
-    </div>
+    <p>You should <a href="/newsletter">subscribe to my newsletter</a>!</p>
+  </div>
 
-    <div style="margin-top: 2rem;">
-        <a href="/resume.pdf" target="_blank">
-            <span aria-hidden="true"></span> View Resume
-        </a>
-    </div>
-  </section>
+  <HomeCarousel />
 </BaseLayout>
