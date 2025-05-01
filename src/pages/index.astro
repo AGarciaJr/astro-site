@@ -3,30 +3,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Alejandro Garcia - Software Engineer" description="Personal website of Alejandro Garcia">
-  <div class="profile-section">
-    <div class="profile-content">
+  <div class="header-section">
+    <div class="header-content">
       <h1>Alejandro Garcia</h1>
-      <h2>Aspiring Software Engineer @ Baylor University</h2>
-
-      <p>Hi! I'm Alex, a Computer Science student at Baylor and a future software engineer with a growing passion for databases and AI. I'm currently exploring research opportunities while building up my portfolio through personal projects and freelance work.</p>
-
-      <p>
-        I got into software development because, where I'm from, it's rare — there's no CS curriculum back home. That gap drives me. Short term, I'm looking to work in industry and learn from experienced engineers. Long term, I want to build pathways for underrepresented communities to discover and thrive in tech.
-      </p>
-
-      <p>
-        Outside of coding, I love reading, watching movies, listening to music, and I've recently taken up golf. I'm actively job hunting, preparing for Baylor's 4+1 program, and working on tools that help people.
-      </p>
-
-      <p>You should <a href="/newsletter">subscribe to my newsletter</a>!</p>
+      <h2>Software Engineering @<br />Baylor University</h2>
     </div>
 
-    <img
-      src="/profile-image.jpg"
-      alt="Alejandro Garcia"
-      class="profile-image"
-    />
+    <div class="profile-image-container">
+      <img
+        src="/profile-image.jpg"
+        alt="Alejandro Garcia"
+        class="profile-image"
+      />
+    </div>
   </div>
 
-  <h3 style="color: #666; margin-top: 3rem;">Here's my most recent posts or <a href="/blog/random">read a random one</a>!</h3>
+  <div class="profile-content">
+    <p>Hi! I'm Alex, a Computer Science student at Baylor and a future software engineer with a growing passion for databases and AI. I'm currently exploring research opportunities while building up my portfolio through personal projects and freelance work.</p>
+
+    <p>
+      I got into software development because, where I'm from, it's rare — there's no CS curriculum back home. That gap drives me. Short term, I'm looking to work in industry and learn from experienced engineers. Long term, I want to build pathways for underrepresented communities to discover and thrive in tech.
+    </p>
+
+    <p>
+      Outside of coding, I love reading, watching movies, listening to music, and I've recently taken up golf. I'm actively job hunting, preparing for Baylor's 4+1 program, and working on tools that help people.
+    </p>
+
+    <p>You should <a href="/newsletter">subscribe to my newsletter</a>!</p>
+  </div>
+
+  <h3>Here's my most recent posts or <a href="/blog/random">read a random one</a>!</h3>
 </BaseLayout>
