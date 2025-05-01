@@ -1,0 +1,98 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from './TagList.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+
+// Format date
+const formatDate = (date: Date): string =>
+  new Date(date).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+---
+
+<article class="blog-card">
+  <div class="card-content">
+    <header class="card-header">
+      <a
+        href={`/blog/${post.slug}`}
+        class="title-link"
+      >
+        {post.data.title}
+      </a>
+      <time
+        datetime={post.data.date.toISOString()}
+        class="post-date"
+      >
+        {formatDate(post.data.date)}
+      </time>
+    </header>
+
+    {post.data.description && (
+      <p class="description">
+        {post.data.description}
+      </p>
+    )}
+
+    {post.data.tags && (
+      <TagList tags={post.data.tags} className="text-sm" />
+    )}
+  </div>
+</article>
+
+<style>
+  .blog-card {
+    transition: transform 0.2s ease;
+    padding: 1rem;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .card-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+
+  .title-link {
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: #ec4899;
+    text-decoration-thickness: 2px;
+    color: inherit;
+  }
+
+  .title-link:hover {
+    color: #2563eb;
+  }
+
+  .post-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .description {
+    font-family: ui-monospace, monospace;
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+</style> 
