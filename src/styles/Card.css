@@ -1,0 +1,70 @@
+/* Shared card styles for BlogCard and ProjectCard */
+
+.card {
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+
+  transition: transform 0.2s ease;
+
+  word-break: break-word;
+  overflow-wrap: anywhere;
+
+  max-width: 600px;
+  width: 100%;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card-content {
+  display: grid;
+  gap: 1rem;
+}
+.card-header {
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, max-content);
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.card-header,
+.card-content {
+  min-width: 0;
+}
+
+.title-link {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #ec4899;
+  text-decoration-thickness: 2px;
+  color: inherit;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.title-link:hover {
+  color: #2563eb;
+}
+.post-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+  white-space: nowrap;
+}
+.description {
+  font-family: ui-monospace, monospace;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.link {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.link:hover {
+  color: #1d4ed8;
+} 

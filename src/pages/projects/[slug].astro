@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
 import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -36,13 +37,7 @@ const { Content } = await project.render();
       
       <h1 class="text-4xl font-bold mb-4">{project.data.title}</h1>
       
-      <div class="flex flex-wrap gap-4 mb-8">
-        {project.data.tags?.map((tag: string) => (
-          <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">
-            {tag}
-          </span>
-        ))}
-      </div>
+      <TagList tags={project.data.tags || []} className="mb-8" />
       
       <div class="prose dark:prose-invert max-w-none mb-8">
         <Content />

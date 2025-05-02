@@ -14,38 +14,39 @@ interface Props {
 }
 
 const { project } = Astro.props;
+import TagList from './TagList.astro';
 ---
 
-<article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-  {project.data.image && (
-    <img 
-      src={project.data.image} 
-      alt={project.data.title}
-      class="w-full h-48 object-cover"
-    />
-  )}
-  
-  <div class="p-6">
-    <h3 class="text-xl font-bold mb-2">{project.data.title}</h3>
-    <p class="text-gray-600 dark:text-gray-300 mb-4">{project.data.description}</p>
-    
-    {project.data.tags && (
-      <div class="flex flex-wrap gap-2 mb-4">
-        {project.data.tags.map(tag => (
-          <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">
-            {tag}
-          </span>
-        ))}
-      </div>
+<style>
+  @import '../styles/Card.css';
+</style>
+
+<article class="card">
+  <div class="card-content">
+    <header class="card-header">
+      <a
+        href={`/projects/${project.slug}`}
+        class="title-link"
+      >
+        {project.data.title}
+      </a>
+    </header>
+
+    {project.data.description && (
+      <p class="description">
+        {project.data.description}
+      </p>
     )}
-    
-    <div class="flex gap-4">
+
+    <TagList tags={project.data.tags || []} className="text-sm mt-2" />
+
+    <div class="flex flex-wrap gap-4 mt-2">
       {project.data.github && (
         <a 
           href={project.data.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-blue-600 dark:text-blue-400 hover:underline"
+          class="link"
         >
           GitHub
         </a>
@@ -55,11 +56,11 @@ const { project } = Astro.props;
           href={project.data.live}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-blue-600 dark:text-blue-400 hover:underline"
+          class="link"
         >
           Live Demo
         </a>
       )}
     </div>
   </div>
-</article> 
+</article>

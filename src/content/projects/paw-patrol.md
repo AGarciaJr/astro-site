@@ -1,16 +1,16 @@
 ---
 title: "Paw Patrol - Pet Adoption Platform"
 description: "A multi-team Software Engineering II project at Baylor, featuring a full-stack pet adoption platform with a recommendation engine and CI/CD deployment."
-pubDate: 2025-04-30
+date: 2025-04-30
 tags: ["spring-boot", "react", "mysql", "gcp", "ci/cd", "recommendation-engine"]
 image: "/images/projects/paw-patrol-banner.jpg"
-github: "https://github.com/yourusername/paw-patrol"
-live: "https://your-deployment-url.com"
+#github: "https://github.com/yourusername/paw-patrol"
+#live: "https://your-deployment-url.com"
 ---
 
 ## Project Overview
 
-**Paw Patrol** was the template-based class project for Baylor’s *Software Engineering II* course in Spring 2025. The project simulated a real-world full-stack development scenario with a robust setup across multiple teams. The application helps users browse and adopt pets through a modern interface backed by a Java Spring API, React frontend, MySQL database, and CI/CD deployment on GCP.
+**Paw Patrol** was the template-based class project for Baylor's *Software Engineering II* course in Spring 2025. The project simulated a real-world full-stack development scenario with a robust setup across multiple teams. The application helps users browse and adopt pets through a modern interface backed by a Java Spring API, React frontend, MySQL database, and CI/CD deployment on GCP.
 
 The provided template included:
 
