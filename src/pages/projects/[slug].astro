@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+// Find project entry
+const projects = await getCollection('projects');
+const project = projects.find((p) => p.slug === slug);
+
+if (!project) {
+  throw new Error(`Project not found: ${slug}`);
+}
+
+const { Content } = await project.render();
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+  <main class="container mx-auto px-4 py-8">
+    <article class="max-w-3xl mx-auto">
+      {project.data.image && (
+        <img 
+          src={project.data.image} 
+          alt={project.data.title}
+          class="w-full h-64 object-cover rounded-lg mb-8"
+        />
+      )}
+      
+      <h1 class="text-4xl font-bold mb-4">{project.data.title}</h1>
+      
+      <TagList tags={project.data.tags || []} className="mb-8" />
+      
+      <div class="prose dark:prose-invert max-w-none mb-8">
+        <Content />
+      </div>
+      
+      <div class="flex gap-4">
+        {project.data.github && (
+          <a 
+            href={project.data.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+          >
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 ..."/>
+            </svg>
+            View on GitHub
+          </a>
+        )}
+        {project.data.live && (
+          <a 
+            href={project.data.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 ..."/>
+            </svg>
+            Live Demo
+          </a>
+        )}
+      </div>
+    </article>
+  </main>
+</BaseLayout>

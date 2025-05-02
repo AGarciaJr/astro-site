@@ -1,0 +1,66 @@
+---
+interface Props {
+  project: {
+    data: {
+      title: string;
+      description: string;
+      image?: string;
+      github?: string;
+      live?: string;
+      tags?: string[];
+    };
+    slug: string;
+  };
+}
+
+const { project } = Astro.props;
+import TagList from './TagList.astro';
+---
+
+<style>
+  @import '../styles/Card.css';
+</style>
+
+<article class="card">
+  <div class="card-content">
+    <header class="card-header">
+      <a
+        href={`/projects/${project.slug}`}
+        class="title-link"
+      >
+        {project.data.title}
+      </a>
+    </header>
+
+    {project.data.description && (
+      <p class="description">
+        {project.data.description}
+      </p>
+    )}
+
+    <TagList tags={project.data.tags || []} className="text-sm mt-2" />
+
+    <div class="flex flex-wrap gap-4 mt-2">
+      {project.data.github && (
+        <a 
+          href={project.data.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          GitHub
+        </a>
+      )}
+      {project.data.live && (
+        <a 
+          href={project.data.live}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          Live Demo
+        </a>
+      )}
+    </div>
+  </div>
+</article>
