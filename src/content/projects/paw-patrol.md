@@ -2,7 +2,7 @@
 title: "Paw Patrol - Pet Adoption Platform"
 description: "A multi-team Software Engineering II project at Baylor, featuring a full-stack pet adoption platform with a recommendation engine and CI/CD deployment."
 date: 2025-04-30
-tags: ["spring-boot", "react", "mysql", "gcp", "ci/cd", "recommendation-engine"]
+tags: ["spring-boot", "react", "mysql", "gcp", "ci-cd", "recommendation-engine"]
 image: "/images/projects/paw-patrol-banner.jpg"
 #github: "https://github.com/yourusername/paw-patrol"
 #live: "https://your-deployment-url.com"

@@ -1,29 +1,29 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 import BlogCard from '../../components/BlogCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const tags = Array.from(new Set(posts.flatMap(post => post.data.tags || [])));
-  
-  return tags.map(tag => ({
+  const blogPosts = await getCollection('blog');
+  const projectPosts = await getCollection('projects');
+  const allItems = [...blogPosts, ...projectPosts];
+
+  const tagSet = new Set(allItems.flatMap(item => item.data.tags || []));
+  return Array.from(tagSet).map(tag => ({
     params: { tag },
-    props: {},
   }));
 }
 
 const { tag } = Astro.params;
-if (!tag) {
-  return Astro.redirect('/404');
-}
 
-const allPosts = await getCollection('blog');
-const posts = allPosts
-  .filter(post => post.data.tags?.includes(tag))
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const blogPosts = await getCollection('blog');
+const projectPosts = await getCollection('projects');
 
-if (!posts.length) {
+const taggedBlogs = blogPosts.filter(post => post.data.tags?.includes(tag));
+const taggedProjects = projectPosts.filter(project => project.data.tags?.includes(tag));
+
+if (!taggedBlogs.length && !taggedProjects.length) {
   return Astro.redirect('/404');
 }
 ---
@@ -31,11 +31,23 @@ if (!posts.length) {
 <BaseLayout title={`#${tag}`}>
   <main class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8 text-center">#{tag}</h1>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {posts.map(post => (
-        <BlogCard post={post} />
-      ))}
-    </div>
+
+    {taggedBlogs.length > 0 && (
+      <>
+        <h2 class="text-xl font-semibold mb-4">Blog Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {taggedBlogs.map(post => <BlogCard post={post} />)}
+        </div>
+      </>
+    )}
+
+    {taggedProjects.length > 0 && (
+      <>
+        <h2 class="text-xl font-semibold mb-4">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {taggedProjects.map(project => <ProjectCard project={project} />)}
+        </div>
+      </>
+    )}
   </main>
-</BaseLayout> 
+</BaseLayout>
