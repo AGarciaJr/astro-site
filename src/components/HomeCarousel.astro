@@ -27,21 +27,12 @@ const formatDate = (date: Date): string =>
     timeZone: 'UTC',
   });
 
-// Mock projects data
-const projects: Project[] = [
-  {
-    title: 'Personal Blog',
-    description: 'A minimalist blog built with Astro and TailwindCSS',
-    link: 'https://github.com/yourusername/blog',
-    tags: ['astro', 'tailwind', 'typescript'],
-  },
-  {
-    title: 'Portfolio Website',
-    description: 'My personal portfolio showcasing my work and experience',
-    link: 'https://github.com/yourusername/portfolio',
-    tags: ['react', 'nextjs', 'typescript'],
-  },
-];
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort(
+  (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const recentProjects = sortedProjects.slice(0, 5);
 ---
 
 <div class="carousel-container mt-16">
