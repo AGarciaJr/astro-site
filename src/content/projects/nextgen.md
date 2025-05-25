@@ -2,7 +2,7 @@
 title: "Mavs NextGen – Take-Home Project for Dallas Mavericks Internship"
 description: "A full-stack web application developed as part of the Dallas Mavericks Software Engineering Internship application process."
 date: 2025-05-25
-tags: ["react", "vite", "typescript", "nodejs", "mysql", "aws", "github-actions"]
+tags: ["react", "vite", "typescript", "nodejs", "ollama", "llama3", "python", "web-scrapping"]
 image: "/images/projects/nextgen-transparent.png"
 live: "https://mavsnextgen.netlify.app/"
 ---
@@ -64,9 +64,17 @@ The project was completed over a week period and involved the following steps:
 
 Embarking on the Mavs NextGen project was both a challenging and enriching experience. As someone not deeply versed in basketball, I initially found it daunting to navigate the myriad of statistics and performance metrics integral to the sport. However, this challenge became an avenue for growth.
 
-I drew parallels from a previous endeavor—our Baseball Trivia group project in the Database Design and Application course. That experience honed my skills in structuring sports-related data and designing intuitive user interfaces for presenting complex statistics. Leveraging this foundation, I approached the basketball domain methodically, researching and understanding the nuances of the game to ensure that the application resonated with both casual fans and seasoned analysts.
+To bridge the knowledge gap, I leveraged generative AI tools by writing custom scripts that communicated with Ollama and LLaMA3. These scripts were designed to analyze player data and generate insightful player summaries—biographical overviews, strengths, and weaknesses—based on stat lines, rankings, and measurements. This not only enhanced the depth and polish of the player profile pages but also allowed the application to intelligently fill in incomplete or missing data with AI-generated content that was (mostly) accurate and contextual.
+
+The project also deepened my experience with web scraping. Building on techniques I began developing in a prior group project (Project Management – Movie Review App), I expanded my skills to gather assets like school logos and team colors, and scrape player statistics and attributes from trusted sources like Sports Reference. This was critical to enriching the frontend experience with personalized visuals and comprehensive player metadata.
+
+Another crucial part of the process was familiarizing myself with the primary end users—basketball scouts. I spent numerous late nights researching how scouts talk about players, what metrics they prioritize, and how evaluations are communicated in real-world contexts. Resources like Kevin O'Connor’s Draft Guide and Yahoo Sports’ Pre-Draft Board (Yahoo Draft Board) were instrumental in this effort. These sources not only made complex scouting evaluations more understandable, but also heavily influenced the design and structure of one of the most important features in my project: the Draft Board. This component was designed to mirror real scouting workflows, offering filters, condensed views, and player comparisons that scouts might find familiar and practical.
+
+I also drew on previous experience from our Baseball Trivia group project in the Database Design and Application course, where I gained experience structuring sports-related data and building user interfaces to make stats more digestible. That foundation helped guide the way I approached analytics, data visualization, and usability in Mavs NextGen.
 
 This project was more than just an assignment; it was an opportunity to bridge my technical expertise with a new domain, pushing me out of my comfort zone. I'm profoundly grateful to the Dallas Mavericks organization for providing this platform to showcase my skills, adapt to new challenges, and gain insights into the multifaceted responsibilities of a software engineering role in the sports industry.
+
+
 
 ---
 
@@ -75,6 +83,8 @@ This project was more than just an assignment; it was an opportunity to bridge m
 Experience the application here: [https://mavsnextgen.netlify.app/](https://mavsnextgen.netlify.app/)
 
 ---
+
+## Visit Kevin O'Connor's Big Board on Yahoo Sports: [here](https://sports.yahoo.com/nba/draft/pre-draft-board/?view=default&board=0&filter=)
 
 ## Repository
 
