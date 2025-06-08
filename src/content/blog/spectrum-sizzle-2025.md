@@ -3,12 +3,11 @@ title: "Spectrum Sizzle – NSF Undergraduate Spectrum Workshop Experience"
 description: "A weeklong hands-on workshop at Baylor exploring spectrum technologies, policy, and career pathways."
 date: 2025-06-05
 tags: ["spectrum", "radar", "wireless", "graduate-school", "baylor", "workshop"]
-image: "/images/blog/sizzle-certificate.png"
 ---
 
 ## Overviews
 
-Earlier this June, I had the opportunity to attend **Spectrum Sizzle**, an NSF-funded undergraduate workshop hosted at **Baylor University**. The event was designed to expose students to real-world wireless spectrum challenges through hands-on labs, academic lectures, and professional panels.
+Earlier this week, I had the opportunity to attend **Spectrum Sizzle**, an NSF-funded undergraduate workshop hosted at **Baylor University**. The event was designed to expose students to real-world wireless spectrum challenges through hands-on labs, academic lectures, and professional panels.
 
 I was invited to participate by **Tom Brooks**, Director of Business Development at SMART Hub, who I originally met during my freshman year in his professional development course. Thanks to that connection, I recieved an invitation to an eye opening experience.
 
@@ -23,8 +22,6 @@ I was assigned to the **Yellow Team**, which rotated through a series of technic
 ## Highlights
 
 ### 🔬 Hands-On Radar Lab
-
-![Radar Lab](/images/blog/radar-lab.png)
 
 One of my favorite sessions was the **Radar System Testing lab**. It was both engaging and fun—we literally ran in front of a radar system to generate and observe our own data. It helped solidify my understanding of radar principles in a way that traditional lectures couldn’t.
 
